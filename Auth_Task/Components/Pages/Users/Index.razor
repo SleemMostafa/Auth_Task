@@ -13,7 +13,7 @@
         </a>
     </div>
 
-    @if (isLoading)
+    @if (_isLoading)
     {
         <div class="text-center">
             <div class="spinner-border" role="status">
@@ -21,7 +21,7 @@
             </div>
         </div>
     }
-    else if (users == null || !users.Any())
+    else if (_users == null || !_users.Any())
     {
         <div class="alert alert-info">
             No users found. Click "Create New User" to add one.
@@ -42,7 +42,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var user in users)
+                    @foreach (var user in _users)
                     {
                         <tr>
                             <td>@user.Username</td>

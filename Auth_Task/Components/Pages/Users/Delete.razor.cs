@@ -10,15 +10,15 @@ public sealed partial class Delete
     public string Id { get; set; } = string.Empty;
 
     [Inject]
-    private IUserService UserService { get; set; } = default!;
+    public required IUserService UserService { get; init; } 
 
     [Inject]
-    private NavigationManager Navigation { get; set; } = default!;
+    public required NavigationManager Navigation { get; init; }
 
-    private User? user;
-    private string errorMessage = string.Empty;
-    private bool isDeleting = false;
-    private bool isLoading = true;
+    private User? _user;
+    private string _errorMessage = string.Empty;
+    private bool _isDeleting;
+    private bool _isLoading = true;
 
     protected override async Task OnInitializedAsync()
     {
@@ -29,17 +29,17 @@ public sealed partial class Delete
     {
         try
         {
-            isLoading = true;
-            user = await UserService.GetUserByIdAsync(Id);
+            _isLoading = true;
+            _user = await UserService.GetUserByIdAsync(Id);
         }
         catch (Exception ex)
         {
-            errorMessage = $"Error loading user: {ex.Message}";
+            _errorMessage = $"Error loading user: {ex.Message}";
 
         }
         finally
         {
-            isLoading = false;
+            _isLoading = false;
         }
     }
 
@@ -47,8 +47,8 @@ public sealed partial class Delete
     {
         try
         {
-            isDeleting = true;
-            errorMessage = string.Empty;
+            _isDeleting = true;
+            _errorMessage = string.Empty;
 
             var result = await UserService.DeleteUserAsync(Id);
 
@@ -58,16 +58,16 @@ public sealed partial class Delete
             }
             else
             {
-                errorMessage = "Failed to delete user. Please try again.";
+                _errorMessage = "Failed to delete user. Please try again.";
             }
         }
         catch (Exception ex)
         {
-            errorMessage = $"An error occurred: {ex.Message}";
+            _errorMessage = $"An error occurred: {ex.Message}";
         }
         finally
         {
-            isDeleting = false;
+            _isDeleting = false;
             StateHasChanged();
         }
     }

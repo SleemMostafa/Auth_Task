@@ -8,7 +8,7 @@
         <div class="container mt-4">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            @if (isLoading)
+            @if (_isLoading)
             {
                 <div class="text-center">
                     <div class="spinner-border" role="status">
@@ -16,7 +16,7 @@
                     </div>
                 </div>
             }
-            else if (user == null)
+            else if (_user == null)
             {
                 <div class="alert alert-danger">
                     User not found.
@@ -30,10 +30,10 @@
                         <h3>Delete User</h3>
                     </div>
                     <div class="card-body">
-                        @if (!string.IsNullOrEmpty(errorMessage))
+                        @if (!string.IsNullOrEmpty(_errorMessage))
                         {
                             <div class="alert alert-danger" role="alert">
-                                @errorMessage
+                                @_errorMessage
                             </div>
                         }
                         
@@ -43,20 +43,20 @@
                         
                         <dl class="row">
                             <dt class="col-sm-3">User ID:</dt>
-                            <dd class="col-sm-9">@user.Id</dd>
+                            <dd class="col-sm-9">@_user.Id</dd>
                             
                             <dt class="col-sm-3">Username:</dt>
-                            <dd class="col-sm-9">@user.Username</dd>
+                            <dd class="col-sm-9">@_user.Username</dd>
                             
                             <dt class="col-sm-3">Full Name:</dt>
-                            <dd class="col-sm-9">@user.UserFullName</dd>
+                            <dd class="col-sm-9">@_user.UserFullName</dd>
                             
                             <dt class="col-sm-3">Date of Birth:</dt>
-                            <dd class="col-sm-9">@user.DateOfBirth.ToString("yyyy-MM-dd")</dd>
+                            <dd class="col-sm-9">@_user.DateOfBirth.ToString("yyyy-MM-dd")</dd>
                             
                             <dt class="col-sm-3">Is Active:</dt>
                             <dd class="col-sm-9">
-                                @if (user.IsActive)
+                                @if (_user.IsActive)
                                 {
                                     <span class="badge bg-success">Active</span>
                                 }
@@ -67,15 +67,15 @@
                             </dd>
                             
                             <dt class="col-sm-3">Creation Date:</dt>
-                            <dd class="col-sm-9">@user.CreationDate.ToString("yyyy-MM-dd HH:mm:ss")</dd>
+                            <dd class="col-sm-9">@_user.CreationDate.ToString("yyyy-MM-dd HH:mm:ss")</dd>
                         </dl>
                         
                         <div class="d-flex justify-content-between mt-4">
                             <button type="button" class="btn btn-secondary" @onclick="Cancel">
                                 <i class="bi bi-x-circle"></i> Cancel
                             </button>
-                            <button type="button" class="btn btn-danger" @onclick="ConfirmDelete" disabled="@isDeleting">
-                                @if (isDeleting)
+                            <button type="button" class="btn btn-danger" @onclick="ConfirmDelete" disabled="@_isDeleting">
+                                @if (_isDeleting)
                                 {
                                     <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
                                     <span>Deleting...</span>

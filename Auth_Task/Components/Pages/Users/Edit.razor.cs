@@ -10,16 +10,16 @@ public sealed partial class Edit : ComponentBase
     public string Id { get; set; } = string.Empty;
 
     [Inject]
-    private IUserService UserService { get; set; } = default!;
+    public required IUserService UserService { get; init; } 
 
     [Inject]
-    private NavigationManager Navigation { get; set; } = default!;
+    public required NavigationManager Navigation { get; init; } 
 
-    private User? user;
-    private string errorMessage = string.Empty;
-    private string successMessage = string.Empty;
-    private bool isSubmitting = false;
-    private bool isLoading = true;
+    private User? _user;
+    private string _errorMessage = string.Empty;
+    private string _successMessage = string.Empty;
+    private bool _isSubmitting;
+    private bool _isLoading = true;
 
     protected override async Task OnInitializedAsync()
     {
@@ -30,17 +30,17 @@ public sealed partial class Edit : ComponentBase
     {
         try
         {
-            isLoading = true;
-            user = await UserService.GetUserByIdAsync(Id);
+            _isLoading = true;
+            _user = await UserService.GetUserByIdAsync(Id);
         }
         catch (Exception ex)
         {
-            errorMessage = $"Error loading user: {ex.Message}";
+            _errorMessage = $"Error loading user: {ex.Message}";
 
         }
         finally
         {
-            isLoading = false;
+            _isLoading = false;
         }
     }
 
@@ -48,39 +48,39 @@ public sealed partial class Edit : ComponentBase
     {
         try
         {
-            isSubmitting = true;
-            errorMessage = string.Empty;
-            successMessage = string.Empty;
+            _isSubmitting = true;
+            _errorMessage = string.Empty;
+            _successMessage = string.Empty;
 
-            if (user == null) return;
+            if (_user == null) return;
 
             // Validate date of birth is in the past
-            if (user.DateOfBirth >= DateTime.Today)
+            if (_user.DateOfBirth >= DateTime.Today)
             {
-                errorMessage = "Date of birth must be a past date.";
+                _errorMessage = "Date of birth must be a past date.";
                 return;
             }
 
-            var result = await UserService.UpdateUserAsync(user);
+            var result = await UserService.UpdateUserAsync(_user);
 
             if (result)
             {
-                successMessage = "User updated successfully!";
+                _successMessage = "User updated successfully!";
                 await Task.Delay(1000);
                 Navigation.NavigateTo("/users");
             }
             else
             {
-                errorMessage = "Failed to update user. Username may already exist.";
+                _errorMessage = "Failed to update user. Username may already exist.";
             }
         }
         catch (Exception ex)
         {
-            errorMessage = $"An error occurred: {ex.Message}";
+            _errorMessage = $"An error occurred: {ex.Message}";
         }
         finally
         {
-            isSubmitting = false;
+            _isSubmitting = false;
             StateHasChanged();
         }
     }

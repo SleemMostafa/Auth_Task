@@ -13,50 +13,50 @@
                     <h3>Create New User</h3>
                 </div>
                 <div class="card-body">
-                    <EditForm Model="@user" OnValidSubmit="@HandleSubmit" FormName="createUserForm">
+                    <EditForm Model="@_user" OnValidSubmit="@HandleSubmit" FormName="createUserForm">
                         <DataAnnotationsValidator />
                         
-                        @if (!string.IsNullOrEmpty(errorMessage))
+                        @if (!string.IsNullOrEmpty(_errorMessage))
                         {
                             <div class="alert alert-danger" role="alert">
-                                @errorMessage
+                                @_errorMessage
                             </div>
                         }
                         
-                        @if (!string.IsNullOrEmpty(successMessage))
+                        @if (!string.IsNullOrEmpty(_successMessage))
                         {
                             <div class="alert alert-success" role="alert">
-                                @successMessage
+                                @_successMessage
                             </div>
                         }
                         
                         <div class="mb-3">
                             <label for="username" class="form-label">Username *</label>
-                            <InputText id="username" class="form-control" @bind-Value="user.Username" placeholder="Enter username" />
-                            <ValidationMessage For="@(() => user.Username)" />
+                            <InputText id="username" class="form-control" @bind-Value="_user.Username" placeholder="Enter username" />
+                            <ValidationMessage For="@(() => _user.Username)" />
                         </div>
                         
                         <div class="mb-3">
                             <label for="password" class="form-label">Password *</label>
-                            <InputText id="password" type="password" class="form-control" @bind-Value="user.Password" placeholder="Enter password" />
-                            <ValidationMessage For="@(() => user.Password)" />
+                            <InputText id="password" type="password" class="form-control" @bind-Value="_user.Password" placeholder="Enter password" />
+                            <ValidationMessage For="@(() => _user.Password)" />
                             <small class="form-text text-muted">Minimum 6 characters</small>
                         </div>
                         
                         <div class="mb-3">
                             <label for="fullname" class="form-label">Full Name *</label>
-                            <InputText id="fullname" class="form-control" @bind-Value="user.UserFullName" placeholder="Enter full name" />
-                            <ValidationMessage For="@(() => user.UserFullName)" />
+                            <InputText id="fullname" class="form-control" @bind-Value="_user.UserFullName" placeholder="Enter full name" />
+                            <ValidationMessage For="@(() => _user.UserFullName)" />
                         </div>
                         
                         <div class="mb-3">
                             <label for="dob" class="form-label">Date of Birth *</label>
-                            <InputDate id="dob" class="form-control" @bind-Value="user.DateOfBirth" />
-                            <ValidationMessage For="@(() => user.DateOfBirth)" />
+                            <InputDate id="dob" class="form-control" @bind-Value="_user.DateOfBirth" />
+                            <ValidationMessage For="@(() => _user.DateOfBirth)" />
                         </div>
                         
                         <div class="mb-3 form-check">
-                            <InputCheckbox id="isactive" class="form-check-input" @bind-Value="user.IsActive" />
+                            <InputCheckbox id="isactive" class="form-check-input" @bind-Value="_user.IsActive" />
                             <label for="isactive" class="form-check-label">Is Active</label>
                         </div>
                         
@@ -64,8 +64,8 @@
                             <button type="button" class="btn btn-secondary" @onclick="Cancel">
                                 <i class="bi bi-x-circle"></i> Cancel
                             </button>
-                            <button type="submit" class="btn btn-primary" disabled="@isSubmitting">
-                                @if (isSubmitting)
+                            <button type="submit" class="btn btn-primary" disabled="@_isSubmitting">
+                                @if (_isSubmitting)
                                 {
                                     <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
                                     <span>Creating...</span>

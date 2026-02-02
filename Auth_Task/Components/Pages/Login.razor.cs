@@ -8,54 +8,54 @@ namespace Auth_Task.Components.Pages;
 public sealed partial class Login
 {
     [Inject]
-    private IAccountService AccountService { get; set; } = default!;
+    public required IAccountService AccountService { get; set; }
 
     [Inject]
-    private CustomAuthenticationStateProvider AuthStateProvider { get; set; } = default!;
+    public required CustomAuthenticationStateProvider AuthStateProvider { get; set; }
 
     [Inject]
-    private NavigationManager Navigation { get; set; } = default!;
+    public required NavigationManager Navigation { get; set; }
 
     [SupplyParameterFromForm]
-    private LoginDto? loginDto { get; set; }
+    private LoginDto? LoginDto { get; set; }
     
-    private string errorMessage = string.Empty;
-    private bool isLoading = false;
+    private string _errorMessage = string.Empty;
+    private bool _isLoading;
 
     protected override void OnInitialized()
     {
-        loginDto ??= new LoginDto();
+        LoginDto ??= new LoginDto();
     }
 
     private async Task HandleLogin()
     {
-        if (loginDto == null) return;
+        if (LoginDto == null) return;
         
         try
         {
-            isLoading = true;
-            errorMessage = string.Empty;
+            _isLoading = true;
+            _errorMessage = string.Empty;
             StateHasChanged();
 
-            var result = await AccountService.LoginAsync(loginDto);
+            var result = await AccountService.LoginAsync(LoginDto);
 
             if (result)
             {
-                await AuthStateProvider.MarkUserAsAuthenticated(loginDto.Username);
+                await AuthStateProvider.MarkUserAsAuthenticated(LoginDto.Username);
                 Navigation.NavigateTo("/", forceLoad: true);
             }
             else
             {
-                errorMessage = "Invalid username or password, or account is inactive.";
+                _errorMessage = "Invalid username or password, or account is inactive.";
             }
         }
         catch (Exception ex)
         {
-            errorMessage = "An error occurred during login. Please try again.";
+            _errorMessage = "An error occurred during login. Please try again.";
         }
         finally
         {
-            isLoading = false;
+            _isLoading = false;
             StateHasChanged();
         }
     }

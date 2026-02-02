@@ -7,13 +7,13 @@ namespace Auth_Task.Components.Pages;
 public sealed partial class Home
 {
     [Inject]
-    private IAccountService AccountService { get; set; } = default!;
+    public required IAccountService AccountService { get; init; }
 
     [Inject]
-    private CustomAuthenticationStateProvider AuthStateProvider { get; set; } = default!;
+    public required CustomAuthenticationStateProvider AuthStateProvider { get; init; }
 
     [Inject]
-    private NavigationManager Navigation { get; set; } = default!;
+    public required NavigationManager Navigation { get; init; }
 
     private async Task HandleLogout()
     {

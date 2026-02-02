@@ -7,13 +7,13 @@ namespace Auth_Task.Components.Pages.Users;
 public sealed partial class Index
 {
     [Inject]
-    private IUserService UserService { get; set; } = default!;
+    public required IUserService UserService { get; init; }
 
     [Inject]
-    private NavigationManager Navigation { get; set; } = default!;
+    public required NavigationManager Navigation { get; init; }
 
-    private List<User>? users;
-    private bool isLoading = true;
+    private List<User>? _users;
+    private bool _isLoading = true;
 
     protected override async Task OnInitializedAsync()
     {
@@ -24,15 +24,16 @@ public sealed partial class Index
     {
         try
         {
-            isLoading = true;
-            users = await UserService.GetAllUsersAsync();
+            _isLoading = true;
+            _users = await UserService.GetAllUsersAsync();
         }
         catch (Exception ex)
         {
+            // ignored
         }
         finally
         {
-            isLoading = false;
+            _isLoading = false;
         }
     }
 }
