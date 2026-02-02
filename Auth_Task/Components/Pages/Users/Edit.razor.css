@@ -1,0 +1,43 @@
+.user-form-card {
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    border: none;
+}
+
+.user-form-card .card-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-radius: 15px 15px 0 0;
+    padding: 1.5rem;
+}
+
+.user-form-card .card-header h3 {
+    margin: 0;
+    font-weight: 600;
+}
+
+.user-form-card .form-label {
+    font-weight: 600;
+    color: #495057;
+}
+
+.user-form-card .form-control:focus,
+.user-form-card .form-check-input:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+}
+
+.user-form-buttons {
+    padding-top: 1rem;
+    border-top: 1px solid #dee2e6;
+}
+
+.user-form-buttons .btn {
+    min-width: 120px;
+    font-weight: 600;
+}
+
+.form-control:disabled {
+    background-color: #e9ecef;
+    opacity: 0.7;
+}

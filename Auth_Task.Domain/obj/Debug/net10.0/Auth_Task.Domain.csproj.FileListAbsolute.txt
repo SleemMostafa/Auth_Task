@@ -1,0 +1,11 @@
+E:\SelfStydy\Entishar\Auth_Task\Auth_Task.Domain\bin\Debug\net10.0\Auth_Task.Domain.deps.json
+E:\SelfStydy\Entishar\Auth_Task\Auth_Task.Domain\bin\Debug\net10.0\Auth_Task.Domain.dll
+E:\SelfStydy\Entishar\Auth_Task\Auth_Task.Domain\bin\Debug\net10.0\Auth_Task.Domain.pdb
+E:\SelfStydy\Entishar\Auth_Task\Auth_Task.Domain\obj\Debug\net10.0\Auth_Task.Domain.GeneratedMSBuildEditorConfig.editorconfig
+E:\SelfStydy\Entishar\Auth_Task\Auth_Task.Domain\obj\Debug\net10.0\Auth_Task.Domain.AssemblyInfoInputs.cache
+E:\SelfStydy\Entishar\Auth_Task\Auth_Task.Domain\obj\Debug\net10.0\Auth_Task.Domain.AssemblyInfo.cs
+E:\SelfStydy\Entishar\Auth_Task\Auth_Task.Domain\obj\Debug\net10.0\Auth_Task.Domain.csproj.CoreCompileInputs.cache
+E:\SelfStydy\Entishar\Auth_Task\Auth_Task.Domain\obj\Debug\net10.0\Auth_Task.Domain.dll
+E:\SelfStydy\Entishar\Auth_Task\Auth_Task.Domain\obj\Debug\net10.0\refint\Auth_Task.Domain.dll
+E:\SelfStydy\Entishar\Auth_Task\Auth_Task.Domain\obj\Debug\net10.0\Auth_Task.Domain.pdb
+E:\SelfStydy\Entishar\Auth_Task\Auth_Task.Domain\obj\Debug\net10.0\ref\Auth_Task.Domain.dll

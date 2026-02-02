@@ -1,0 +1,68 @@
+﻿@page "/"
+@rendermode InteractiveServer
+
+<PageTitle>Home</PageTitle>
+
+<AuthorizeView Context="authContext">
+    <Authorized>
+        <div class="container mt-5">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card shadow">
+                        <div class="card-body text-center py-5">
+                            <h1 class="display-4">Welcome, @authContext.User.Identity?.Name!</h1>
+                            <p class="lead mt-3">You are successfully logged into the User Management System</p>
+                            
+                            <div class="mt-4">
+                                <a href="/users" class="btn btn-primary btn-lg me-2 home-action-btn">
+                                    <i class="bi bi-people"></i> Manage Users
+                                </a>
+                                <button class="btn btn-outline-secondary btn-lg home-action-btn" @onclick="HandleLogout">
+                                    <i class="bi bi-box-arrow-right"></i> Logout
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row mt-4">
+                <div class="col-md-6">
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title"><i class="bi bi-people-fill"></i> User Management</h5>
+                            <p class="card-text">Create, edit, and delete users in the system.</p>
+                            <a href="/users" class="btn btn-primary">Go to Users</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title"><i class="bi bi-person-circle"></i> Your Profile</h5>
+                            <p class="card-text">Logged in as: <strong>@authContext.User.Identity?.Name</strong></p>
+                            <button class="btn btn-secondary" @onclick="HandleLogout">Logout</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </Authorized>
+    <NotAuthorized>
+        <div class="container mt-5">
+            <div class="row justify-content-center">
+                <div class="col-md-8 text-center">
+                    <div class="card shadow">
+                        <div class="card-body py-5">
+                            <h1 class="display-4 mb-4">Welcome to User Management System</h1>
+                            <p class="lead mb-4">Please login to continue</p>
+                            <a href="/login" class="btn btn-primary btn-lg">
+                                <i class="bi bi-box-arrow-in-right"></i> Login
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </NotAuthorized>
+</AuthorizeView>
