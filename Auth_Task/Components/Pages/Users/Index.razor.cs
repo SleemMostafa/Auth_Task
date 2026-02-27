@@ -27,7 +27,7 @@ public sealed partial class Index
             _isLoading = true;
             _users = await UserService.GetAllUsersAsync();
         }
-        catch (Exception ex)
+        catch (Exception)
         {
             // ignored
         }

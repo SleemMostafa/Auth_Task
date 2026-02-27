@@ -49,7 +49,7 @@ public sealed partial class Login
                 _errorMessage = "Invalid username or password, or account is inactive.";
             }
         }
-        catch (Exception ex)
+        catch (Exception)
         {
             _errorMessage = "An error occurred during login. Please try again.";
         }

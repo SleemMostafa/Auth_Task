@@ -16,6 +16,7 @@ public sealed partial class Edit : ComponentBase
     public required NavigationManager Navigation { get; init; } 
 
     private User? _user;
+    private string _newPassword = string.Empty;
     private string _errorMessage = string.Empty;
     private string _successMessage = string.Empty;
     private bool _isSubmitting;
@@ -36,7 +37,6 @@ public sealed partial class Edit : ComponentBase
         catch (Exception ex)
         {
             _errorMessage = $"Error loading user: {ex.Message}";
-
         }
         finally
         {
@@ -61,7 +61,7 @@ public sealed partial class Edit : ComponentBase
                 return;
             }
 
-            var result = await UserService.UpdateUserAsync(_user);
+            var result = await UserService.UpdateUserAsync(_user, string.IsNullOrWhiteSpace(_newPassword) ? null : _newPassword);
 
             if (result)
             {
