@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "ytzEVUzWF1M=",
+  "dgSpecHash": "PvPcHWDJn7M=",
   "success": true,
   "projectFilePath": "E:\\SelfStydy\\Entishar\\Auth_Task\\Auth_Task.Application\\Auth_Task.Application.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\Saleem\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\10.0.3\\microsoft.extensions.dependencyinjection.abstractions.10.0.3.nupkg.sha512"
+  ],
   "logs": []
 }
