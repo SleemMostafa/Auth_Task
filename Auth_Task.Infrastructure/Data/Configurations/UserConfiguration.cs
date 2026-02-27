@@ -25,7 +25,7 @@ public sealed class UserConfiguration : IEntityTypeConfiguration<User>
 
         builder.Property(e => e.Password)
             .IsRequired()
-            .HasMaxLength(100);
+            .HasMaxLength(200);
 
         builder.Property(e => e.UserFullName)
             .IsRequired()
@@ -48,7 +48,7 @@ public sealed class UserConfiguration : IEntityTypeConfiguration<User>
             {
                 Id = "1",
                 Username = "admin",
-                Password = "admin123",
+                Password = "$pbkdf2-sha256$100000$U2VlZEFkbWluU2FsdDEyMw==$Z82h9Zs5auVHK60FJmF1IxtOxx4COmdhfFTjuemdtOg=",
                 UserFullName = "Administrator",
                 IsActive = true,
                 DateOfBirth = new DateTime(1990, 1, 1),

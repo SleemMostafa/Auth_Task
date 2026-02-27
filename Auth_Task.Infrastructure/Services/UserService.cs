@@ -3,7 +3,7 @@ using Auth_Task.Domain.Entities;
 
 namespace Auth_Task.Infrastructure.Services;
 
-public sealed class UserService(IUserRepository userRepository) : IUserService
+public sealed class UserService(IUserRepository userRepository, IPasswordHasher passwordHasher) : IUserService
 {
     public async Task<List<User>> GetAllUsersAsync()
     {
@@ -23,15 +23,30 @@ public sealed class UserService(IUserRepository userRepository) : IUserService
         }
 
         user.Id = Guid.NewGuid().ToString();
-        user.CreationDate = DateTime.Now;
+        user.Password = passwordHasher.HashPassword(user.Password);
+        user.CreationDate = DateTime.UtcNow;
         return await userRepository.CreateUserAsync(user);
     }
 
-    public async Task<bool> UpdateUserAsync(User user)
+    public async Task<bool> UpdateUserAsync(User user, string? newPassword = null)
     {
         if (await userRepository.UsernameExistsAsync(user.Username, user.Id))
         {
             return false;
+        }
+
+        if (!string.IsNullOrWhiteSpace(newPassword))
+        {
+            user.Password = passwordHasher.HashPassword(newPassword);
+        }
+        else
+        {
+            var existing = await userRepository.GetUserByIdAsync(user.Id);
+            if (existing == null)
+            {
+                return false;
+            }
+            user.Password = existing.Password;
         }
 
         return await userRepository.UpdateUserAsync(user);

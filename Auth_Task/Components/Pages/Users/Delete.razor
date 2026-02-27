@@ -1,11 +1,10 @@
 @page "/users/delete/{id}"
 @rendermode InteractiveServer
+@attribute [Authorize]
 
 <PageTitle>Delete User</PageTitle>
 
-<AuthorizeView Context="authContext">
-    <Authorized>
-        <div class="container mt-4">
+<div class="container mt-4">
     <div class="row justify-content-center">
         <div class="col-md-8">
             @if (_isLoading)
@@ -92,15 +91,3 @@
         </div>
     </div>
 </div>
-    </Authorized>
-    <NotAuthorized>
-        <div class="container mt-5">
-            <div class="alert alert-warning" role="alert">
-                <h4 class="alert-heading">Access Denied</h4>
-                <p>You must be logged in to access this page.</p>
-                <hr>
-                <a href="/login" class="btn btn-primary">Go to Login</a>
-            </div>
-        </div>
-    </NotAuthorized>
-</AuthorizeView>

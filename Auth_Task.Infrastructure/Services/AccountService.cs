@@ -3,7 +3,7 @@ using Auth_Task.Application.Interfaces;
 
 namespace Auth_Task.Infrastructure.Services;
 
-public sealed class AccountService(IUserRepository userRepository) : IAccountService
+public sealed class AccountService(IUserRepository userRepository, IPasswordHasher passwordHasher) : IAccountService
 {
     public async Task<bool> LoginAsync(LoginDto loginDto)
     {
@@ -14,7 +14,7 @@ public sealed class AccountService(IUserRepository userRepository) : IAccountSer
             return false;
         }
 
-        if (user.Password != loginDto.Password)
+        if (!passwordHasher.VerifyPassword(loginDto.Password, user.Password))
         {
             return false;
         }
